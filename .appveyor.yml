@@ -14,9 +14,9 @@ init:
   - python --version
   - python -m site
   - python -m pip install -U pip setuptools wheel
-  - mkdir dist
 
 install:
+  - mkdir dist
   - pip install twisted --download dist
 
 # Not a project with an msbuild file, build done at install.
