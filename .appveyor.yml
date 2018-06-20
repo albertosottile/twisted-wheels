@@ -30,7 +30,7 @@ artifacts:
 
 # Push artefact to S3 bucket and list all
 before_deploy:
-  - dir twisted-wheels
+  - dir dist
   #- python -c "from PySide2 import QtCore; print QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.PluginsPath)"
 
 
