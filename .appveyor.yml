@@ -1,0 +1,49 @@
+environment:
+  PYTHON: "C:\\Python34"
+  PYTHON_VERSION: 3.4
+  PYTHON_ARCH: 32
+
+platform: x86
+
+configuration: Release
+
+init:
+  - set PYTHONPATH=%PYTHON%
+  - set PYTHONHOME=%PYTHON%
+  - set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+  - python --version
+  - python -m site
+  - python -m pip install -U pip setuptools wheel
+  - mkdir twisted-wheels
+
+install:
+  - pip install twisted --download twisted-wheels
+
+# Not a project with an msbuild file, build done at install.
+build: off
+
+artifacts:
+  - path: 'twisted-wheels'
+    type: zip
+    name: twisted-wheels
+
+
+# Push artefact to S3 bucket and list all
+before_deploy:
+  - dir twisted-wheels
+  #- python -c "from PySide2 import QtCore; print QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.PluginsPath)"
+
+
+# Deploy build to BinTray
+deploy:
+  provider: BinTray
+  username: alby128
+  api_key:
+    secure: lAocj5KA9Z9x4BefQBIgNlQJbeW4qPBfCgYVBHMyOP3NgyhnMLmvR57ZCqtCKBlQ
+  subject: alby128
+  repo: Syncplay
+  package: Syncplay
+  version: "test"
+  publish: true
+  override: true
+    
