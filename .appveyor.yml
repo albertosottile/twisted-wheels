@@ -17,7 +17,7 @@ init:
 
 install:
   - mkdir dist
-  - pip install twisted --download dist
+  - pip wheel twisted -w dist
 
 # Not a project with an msbuild file, build done at install.
 build: off
