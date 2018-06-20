@@ -14,16 +14,16 @@ init:
   - python --version
   - python -m site
   - python -m pip install -U pip setuptools wheel
-  - mkdir twisted-wheels
+  - mkdir dist
 
 install:
-  - pip install twisted --download twisted-wheels
+  - pip install twisted --download dist
 
 # Not a project with an msbuild file, build done at install.
 build: off
 
 artifacts:
-  - path: 'twisted-wheels'
+  - path: 'dist'
     type: zip
     name: twisted-wheels
 
